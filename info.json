@@ -1,0 +1,11 @@
+{
+    "name": "SubtleMapTileColors",
+    "version": "0.1.0",
+    "title": "Subtle Map Tile Colors",
+    "author": "Dewin",
+    "contact": "https://github.com/dewiniaid/SubtleMapTileColors",
+    "homepage": "https://github.com/dewiniaid/SubtleMapTileColors",
+    "factorio_version": "0.18",
+    "dependencies": ["base >= 0.18"],
+    "description": "Desaturates and makes other adjustment to map colors for tiles"
+}
