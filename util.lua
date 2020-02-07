@@ -7,7 +7,7 @@ function util.rgb_to_hsl(rgb)
     local b = rgb[3] or rgb.b
     local a = rgb[4] or rgb.a
 
-    if r > 1 or g > 1 or b > 1 then
+    if r > 1 or g > 1 or b > 1 or rgb.scaled then
         r, g, b = r / 255, g / 255, b / 255
     end
 
@@ -102,6 +102,51 @@ function util.adjust_brightness(rgb, factor)
         return util.darken(rgb, factor)
     else
         return util.lighten(rgb, factor-1)
+    end
+end
+
+function util.parse_color(s, text)
+    local r = 0
+    local g = 0
+    local b = 0
+    local _
+
+    -- Trim input
+    s = (string.gsub(s, "^%s*(.-)%s*$", "%1"))
+
+    -- Hex formats
+    -- 1 character per
+    _, _, r, g, b = string.find(s, "^#?(%x)(%x)(%x)$")
+    if r then
+        r = r .. r
+        g = g .. g
+        b = b .. b
+    else
+        -- 2 characters per
+        _, _, r, g, b = string.find(s, "^#?(%x%x)(%x%x)(%x%x)$")
+    end
+    if r then
+        return {
+            r=tonumber(r, 16)/255,
+            g=tonumber(g, 16)/255,
+            b=tonumber(b, 16)/255,
+        }
+    end
+
+    -- Decimal formats
+    _, _, r, g, b = string.find(s, "^(%d*%.?%d+)[%s,;]+(%d*%.?%d+)[%s,;]+(%d*%.?%d+)$")
+    if r then
+        return {
+            r=tonumber(r),
+            g=tonumber(g),
+            b=tonumber(b),
+        }
+    end
+
+    if text then
+        log("Unrecognized color: '" .. s .. "'")
+    else
+        log("Unrecognized color for " .. text .. ": '" .. s .. "'")
     end
 end
 

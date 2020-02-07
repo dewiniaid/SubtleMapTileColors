@@ -6,6 +6,6 @@
     "contact": "https://github.com/dewiniaid/SubtleMapTileColors",
     "homepage": "https://github.com/dewiniaid/SubtleMapTileColors",
     "factorio_version": "0.18",
-    "dependencies": ["base >= 0.18"],
+    "dependencies": ["base >= 0.18", "? alien-biomes", "? custom-map-colors"],
     "description": "Desaturates and makes other adjustment to map colors for tiles"
 }
